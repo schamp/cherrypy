@@ -2,6 +2,7 @@
 
 import logging
 import re
+import urllib
 
 import cherrypy
 from cherrypy._cpcompat import basestring, md5, set, unicodestr
@@ -332,7 +333,7 @@ Message: %(error_msg)s
             cherrypy.serving.request.login = username
             cherrypy.session[self.session_key] = username
             self.on_login(username)
-            raise cherrypy.HTTPRedirect(from_page or "/")
+            raise cherrypy.HTTPRedirect(urllib.parse.unquote(from_page) or "/")
 
     def do_logout(self, from_page='..', **kwargs):
         """Logout. May raise redirect, or return True if request handled."""
