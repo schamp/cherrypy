@@ -2,6 +2,7 @@
 
 import logging
 import re
+import urllib
 from hashlib import md5
 
 import six
